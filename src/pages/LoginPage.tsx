@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Sprout, Shield } from 'lucide-react';
 
-export default function LoginPage() {
+export default function LoginPage({ onSwitchToSignup }: { onSwitchToSignup: () => void }) {
     const { login } = useAuth();
-    const [aadhar, setAadhar] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -15,15 +15,15 @@ export default function LoginPage() {
         setLoading(true);
 
         // Simple validation
-        if (!aadhar || !password) {
-            setError('Please enter both Aadhaar number and password');
+        if (!username || !password) {
+            setError('Please enter both username and password');
             setLoading(false);
             return;
         }
 
-        const success = login(aadhar, password);
+        const success = login(username, password);
         if (!success) {
-            setError('Invalid Aadhaar number or password');
+            setError('Invalid username or password');
         }
         setLoading(false);
     };
@@ -53,15 +53,15 @@ export default function LoginPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
-                            <label htmlFor="aadhar" className="block text-sm font-medium text-gray-700 mb-2">
-                                Aadhaar Number
+                            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
+                                Username
                             </label>
                             <input
-                                id="aadhar"
+                                id="username"
                                 type="text"
-                                value={aadhar}
-                                onChange={(e) => setAadhar(e.target.value)}
-                                placeholder="1234-5678-9101"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="e.g., ramesh_kumar"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
                             />
                         </div>
@@ -98,20 +98,26 @@ export default function LoginPage() {
                     {/* Demo Credentials */}
                     <div className="mt-6 pt-6 border-t border-gray-200">
                         <p className="text-xs text-gray-500 text-center mb-3">Demo Credentials</p>
-                        <div className="bg-earth-50 p-3 rounded-lg text-xs space-y-1">
-                            <p><span className="font-medium">Aadhaar:</span> 1234-5678-9101</p>
-                            <p><span className="font-medium">Password:</span> demo123</p>
-                            <p className="text-gray-500 mt-2 italic">
-                                (Try any Aadhaar from 1234-5678-9101 to 1012-3456-7890)
-                            </p>
+                        <div className="bg-gray-50 p-3 rounded-lg text-xs text-gray-600 space-y-1">
+                            <p><strong>Username:</strong> ramesh_kumar</p>
+                            <p><strong>Password:</strong> demo123</p>
                         </div>
                     </div>
-                </div>
 
-                {/* Footer */}
-                <p className="text-center text-sm text-gray-500 mt-6">
-                    Powered by Satellite Damage Detection & AI
-                </p>
+                    {/* Create Account Link */}
+                    <div className="mt-6 pt-6 border-t border-gray-200 text-center">
+                        <p className="text-gray-600">
+                            Don't have an account?{' '}
+                            <button
+                                type="button"
+                                onClick={onSwitchToSignup}
+                                className="text-primary-600 font-semibold hover:text-primary-700"
+                            >
+                                Sign up here
+                            </button>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );
