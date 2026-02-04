@@ -1,4 +1,5 @@
-import { useLanguage, Language } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/LanguageContext';
+import type { Language } from '../contexts/LanguageContext';
 import { Languages } from 'lucide-react';
 
 export default function LanguageSelector() {
