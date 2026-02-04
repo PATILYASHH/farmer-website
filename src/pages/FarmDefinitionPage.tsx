@@ -100,20 +100,20 @@ export default function FarmDefinitionPage({ onNext }: { onNext: () => void }) {
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
             <header className="bg-white border-b border-gray-200 shadow-sm">
-                <div className="max-w-6xl mx-auto px-4 py-6">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Define Your Farm</h1>
-                    <p className="text-gray-600">
+                <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
+                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Define Your Farm</h1>
+                    <p className="text-sm md:text-base text-gray-600">
                         Draw your farm boundary on the map by clicking to place points. Click the polygon tool to create your farm area.
                     </p>
                 </div>
             </header>
 
-            <div className="max-w-6xl mx-auto px-4 py-6">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
                     {/* Map */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
-                            <div className="h-96 md:h-[500px]">
+                        <div className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+                            <div className="h-80 md:h-96 lg:h-[500px]">
                                 <MapContainer
                                     center={[defaultLat, defaultLng]}
                                     zoom={18}
@@ -145,8 +145,8 @@ export default function FarmDefinitionPage({ onNext }: { onNext: () => void }) {
                                     </FeatureGroup>
                                 </MapContainer>
                             </div>
-                            <div className="bg-blue-50 border-t border-blue-200 p-4">
-                                <p className="text-sm text-blue-700">
+                            <div className="bg-blue-50 border-t border-blue-200 p-3 md:p-4">
+                                <p className="text-xs md:text-sm text-blue-700">
                                     <strong>Satellite View:</strong> Use the drawing tools to mark your actual farm boundaries visible in the satellite imagery. Zoom in for better accuracy.
                                 </p>
                             </div>
@@ -156,39 +156,39 @@ export default function FarmDefinitionPage({ onNext }: { onNext: () => void }) {
                     {/* Info Panel */}
                     <div>
                         {/* Farmer Info */}
-                        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200">
-                            <h2 className="text-lg font-bold text-gray-900 mb-4">Your Details</h2>
-                            <div className="space-y-3">
+                        <div className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 mb-4 md:mb-6 border border-gray-200">
+                            <h2 className="text-base md:text-lg font-bold text-gray-900 mb-3 md:mb-4">Your Details</h2>
+                            <div className="space-y-2 md:space-y-3">
                                 <div>
                                     <p className="text-xs text-gray-500 uppercase font-semibold">Name</p>
-                                    <p className="text-gray-900 font-medium">{farmer.fullName}</p>
+                                    <p className="text-sm md:text-base text-gray-900 font-medium">{farmer.fullName}</p>
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 uppercase font-semibold">Location</p>
-                                    <p className="text-gray-900 font-medium">{farmer.location?.village}, {farmer.location?.district}</p>
+                                    <p className="text-sm md:text-base text-gray-900 font-medium">{farmer.location?.village}, {farmer.location?.district}</p>
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 uppercase font-semibold">Coordinates</p>
-                                    <p className="text-sm text-gray-700 font-mono">{defaultLat}, {defaultLng}</p>
+                                    <p className="text-xs md:text-sm text-gray-700 font-mono">{defaultLat}, {defaultLng}</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Farm Size Display */}
-                        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl border-2 border-green-300 p-6 mb-6">
+                        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl md:rounded-2xl border-2 border-green-300 p-4 md:p-6 mb-4 md:mb-6">
                             <div className="text-center">
-                                <p className="text-sm text-green-700 font-semibold mb-2">FARM SIZE</p>
-                                <p className="text-4xl font-bold text-green-900 mb-1">
+                                <p className="text-xs md:text-sm text-green-700 font-semibold mb-2">FARM SIZE</p>
+                                <p className="text-3xl md:text-4xl font-bold text-green-900 mb-1">
                                     {farmSize.toFixed(1)}
                                 </p>
-                                <p className="text-green-700 font-medium">acres</p>
+                                <p className="text-sm md:text-base text-green-700 font-medium">acres</p>
                             </div>
                         </div>
 
                         {/* Instructions */}
-                        <div className="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-4 mb-6">
-                            <h3 className="font-bold text-yellow-900 mb-2">Steps:</h3>
-                            <ol className="text-sm text-yellow-800 space-y-1 list-decimal list-inside">
+                        <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl md:rounded-2xl p-3 md:p-4 mb-4 md:mb-6">
+                            <h3 className="text-sm md:text-base font-bold text-yellow-900 mb-2">Steps:</h3>
+                            <ol className="text-xs md:text-sm text-yellow-800 space-y-1 list-decimal list-inside">
                                 <li>Click the drawing tool above</li>
                                 <li>Click on map to place corner points</li>
                                 <li>Double-click to complete polygon</li>
@@ -200,7 +200,7 @@ export default function FarmDefinitionPage({ onNext }: { onNext: () => void }) {
                         {/* Buttons */}
                         <div className="space-y-3">
                             {error && (
-                                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                                <div className="bg-red-50 border border-red-200 text-red-700 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm">
                                     {error}
                                 </div>
                             )}
@@ -208,16 +208,16 @@ export default function FarmDefinitionPage({ onNext }: { onNext: () => void }) {
                             <button
                                 onClick={handleClearDraw}
                                 disabled={drawnPoints.length === 0}
-                                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 md:py-3 text-sm md:text-base bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                <Trash2 className="w-5 h-5" />
+                                <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
                                 Clear Drawing
                             </button>
 
                             <button
                                 onClick={handleSubmit}
                                 disabled={drawnPoints.length < 3 || farmSize <= 0}
-                                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 md:py-3 text-sm md:text-base bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 Continue
                                 <ChevronRight className="w-5 h-5" />
