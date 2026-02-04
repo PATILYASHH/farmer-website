@@ -125,14 +125,14 @@ export default function DisasterSimulation({
     const farmCoordinates = convertCoordinates(farmBoundary);
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
             {/* Header */}
-            <div className="bg-red-50 border-2 border-red-300 rounded-2xl p-6">
-                <div className="flex items-start gap-4">
-                    <AlertTriangle className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
+            <div className="bg-red-50 border-2 border-red-300 rounded-xl md:rounded-2xl p-4 md:p-6">
+                <div className="flex items-start gap-3 md:gap-4">
+                    <AlertTriangle className="w-6 h-6 md:w-8 md:h-8 text-red-600 flex-shrink-0 mt-1" />
                     <div>
-                        <h2 className="text-2xl font-bold text-red-900 mb-2">Disaster Simulation</h2>
-                        <p className="text-red-800">
+                        <h2 className="text-xl md:text-2xl font-bold text-red-900 mb-2">Disaster Simulation</h2>
+                        <p className="text-sm md:text-base text-red-800">
                             Simulate various disaster scenarios to see potential damage and insurance coverage. This helps you understand your farm's risk profile.
                         </p>
                     </div>
@@ -141,26 +141,26 @@ export default function DisasterSimulation({
 
             {/* Disaster Selection */}
             <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Select a Disaster Scenario</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3 md:mb-4">Select a Disaster Scenario</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                     {DISASTER_SCENARIOS.map(disaster => (
                         <button
                             key={disaster.name}
                             onClick={() => simulateDisaster(disaster)}
-                            className={`p-4 rounded-xl border-2 font-semibold transition text-left ${
+                            className={`p-3 md:p-4 rounded-xl border-2 font-semibold transition text-left ${
                                 selectedDisaster === disaster.name
                                     ? 'border-red-600 bg-red-50 text-red-900 shadow-lg'
                                     : 'border-gray-300 bg-white text-gray-700 hover:border-red-400 hover:shadow-md'
                             }`}
                         >
                             <div className="flex items-center justify-between mb-2">
-                                <div className="text-3xl font-bold text-red-600">
+                                <div className="text-2xl md:text-3xl font-bold text-red-600">
                                     {disaster.damagePercentage}%
                                 </div>
-                                <AlertTriangle className="w-6 h-6 text-red-500" />
+                                <AlertTriangle className="w-5 h-5 md:w-6 md:h-6 text-red-500" />
                             </div>
-                            <div className="text-sm font-bold mb-1">{disaster.name}</div>
-                            <div className="text-xs text-gray-600">{disaster.description}</div>
+                            <div className="text-xs md:text-sm font-bold mb-1">{disaster.name}</div>
+                            <div className="text-xs text-gray-600 line-clamp-2">{disaster.description}</div>
                         </button>
                     ))}
                 </div>
@@ -168,11 +168,11 @@ export default function DisasterSimulation({
 
             {/* Simulation Results */}
             {simulationData && (
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                     {/* Map View */}
                     {farmBoundary.length > 0 && (
-                        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
-                            <div className="h-80">
+                        <div className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+                            <div className="h-64 md:h-80">
                                 <MapContainer
                                     center={[location.latitude, location.longitude]}
                                     zoom={18}
@@ -202,8 +202,8 @@ export default function DisasterSimulation({
                                     )}
                                 </MapContainer>
                             </div>
-                            <div className="bg-red-50 border-t border-red-200 p-4">
-                                <p className="text-sm text-red-700">
+                            <div className="bg-red-50 border-t border-red-200 p-3 md:p-4">
+                                <p className="text-xs md:text-sm text-red-700">
                                     <strong>Satellite View:</strong> Red highlighted area shows your farm boundary on actual satellite imagery. The affected area during {simulationData.disasterName} is visible on the map.
                                 </p>
                             </div>
@@ -211,19 +211,19 @@ export default function DisasterSimulation({
                     )}
 
                     {/* Results Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
                         {/* Damage Analysis */}
-                        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl border-2 border-red-300 p-6">
-                            <div className="flex items-center gap-2 mb-4">
-                                <TrendingDown className="w-6 h-6 text-red-600" />
-                                <h3 className="text-lg font-bold text-gray-900">Damage Report</h3>
+                        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl md:rounded-2xl border-2 border-red-300 p-4 md:p-6">
+                            <div className="flex items-center gap-2 mb-3 md:mb-4">
+                                <TrendingDown className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
+                                <h3 className="text-base md:text-lg font-bold text-gray-900">Damage Report</h3>
                             </div>
-                            <div className="space-y-4">
-                                <div className="bg-white rounded-lg p-4 border-2 border-red-200">
+                            <div className="space-y-3 md:space-y-4">
+                                <div className="bg-white rounded-lg p-3 md:p-4 border-2 border-red-200">
                                     <p className="text-xs text-gray-600 uppercase font-semibold mb-1">
                                         Disaster Type
                                     </p>
-                                    <p className="text-xl font-bold text-red-900 mb-1">
+                                    <p className="text-lg md:text-xl font-bold text-red-900 mb-1">
                                         {simulationData.disasterName}
                                     </p>
                                     <p className="text-xs text-gray-600">
@@ -231,23 +231,23 @@ export default function DisasterSimulation({
                                     </p>
                                 </div>
 
-                                <div className="bg-red-100 rounded-lg p-4 border border-red-300">
+                                <div className="bg-red-100 rounded-lg p-3 md:p-4 border border-red-300">
                                     <p className="text-xs text-red-700 uppercase font-semibold mb-2">
                                         Crop Damage
                                     </p>
-                                    <p className="text-4xl font-bold text-red-700 mb-1">
+                                    <p className="text-3xl md:text-4xl font-bold text-red-700 mb-1">
                                         {simulationData.damagePercentage}%
                                     </p>
-                                    <div className="w-full bg-red-200 rounded-full h-3 mt-2">
+                                    <div className="w-full bg-red-200 rounded-full h-2 md:h-3 mt-2">
                                         <div 
-                                            className="bg-red-600 h-3 rounded-full transition-all duration-1000"
+                                            className="bg-red-600 h-2 md:h-3 rounded-full transition-all duration-1000"
                                             style={{ width: `${simulationData.damagePercentage}%` }}
                                         ></div>
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="bg-red-50 rounded-lg p-3 border border-red-200">
+                                <div className="grid grid-cols-2 gap-2 md:gap-3">
+                                    <div className="bg-red-50 rounded-lg p-2 md:p-3 border border-red-200">
                                         <p className="text-xs text-gray-600 mb-1">Damaged</p>
                                         <p className="text-xl font-bold text-red-600">
                                             {simulationData.affectedAcres}
