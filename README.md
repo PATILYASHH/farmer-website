@@ -1,4 +1,4 @@
-# PM Kisan Yojana - Farmer Insurance Platform
+# PMFBY - Pradhan Mantri Fasal Bima Yojana
 
 A Progressive Web App (PWA) for detecting flood-damaged farms using satellite imagery and providing insurance to affected farmers.
 

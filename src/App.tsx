@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from './contexts/AuthContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import FarmDefinitionPage from './pages/FarmDefinitionPage';
@@ -29,8 +30,12 @@ function App() {
         }
     }
 
-    // Authenticated user with complete setup - show dashboard
-    return <Dashboard />;
+    // Authenticated user with complete setup - show dashboard with language support
+    return (
+        <LanguageProvider>
+            <Dashboard />
+        </LanguageProvider>
+    );
 }
 
 export default App;

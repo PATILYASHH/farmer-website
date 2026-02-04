@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import WeatherComponent from '../components/WeatherComponent';
 import DisasterSimulation from '../components/DisasterSimulation';
+import ClaimStatus from '../components/ClaimStatus';
+import LanguageSelector from '../components/LanguageSelector';
 import { LogOut, MapPin, BarChart3, Leaf, Droplets } from 'lucide-react';
 
 // Mock weather data
@@ -26,6 +29,7 @@ const mockForecast = [
 
 export default function Dashboard() {
     const { farmer, logout } = useAuth();
+    const { t } = useLanguage();
     const [activeTab, setActiveTab] = useState('overview');
 
     if (!farmer) return null;
@@ -38,14 +42,15 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between">
                         <div>
                             <h1 className="text-2xl font-bold text-primary-700">
-                                PM Kisan Yojana
+                                {t('header.title')}
                             </h1>
                             <p className="text-sm text-gray-600">
-                                Farmer Insurance Dashboard
+                                {t('header.subtitle')}
                             </p>
                         </div>
 
                         <div className="flex items-center gap-4">
+                            <LanguageSelector />
                             <div className="text-right">
                                 <p className="font-medium text-gray-900">{farmer.fullName}</p>
                                 <p className="text-sm text-gray-500">{farmer.username}</p>
@@ -53,7 +58,7 @@ export default function Dashboard() {
                             <button
                                 onClick={logout}
                                 className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
-                                title="Logout"
+                                title={t('header.logout')}
                             >
                                 <LogOut className="w-5 h-5" />
                             </button>
@@ -74,7 +79,17 @@ export default function Dashboard() {
                                     : 'text-gray-600 hover:text-gray-900'
                             }`}
                         >
-                            Overview
+                            {t('tab.overview')}
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('claimStatus')}
+                            className={`flex-1 px-6 py-4 font-semibold transition text-center ${
+                                activeTab === 'claimStatus'
+                                    ? 'border-b-2 border-primary-600 text-primary-600'
+                                    : 'text-gray-600 hover:text-gray-900'
+                            }`}
+                        >
+                            {t('tab.claimStatus')}
                         </button>
                         <button
                             onClick={() => setActiveTab('weather')}
@@ -84,7 +99,7 @@ export default function Dashboard() {
                                     : 'text-gray-600 hover:text-gray-900'
                             }`}
                         >
-                            Weather & Forecast
+                            {t('tab.weather')}
                         </button>
                         <button
                             onClick={() => setActiveTab('disaster')}
@@ -94,7 +109,7 @@ export default function Dashboard() {
                                     : 'text-gray-600 hover:text-gray-900'
                             }`}
                         >
-                            Disaster Simulation
+                            {t('tab.disaster')}
                         </button>
                     </div>
                 </div>
@@ -109,12 +124,12 @@ export default function Dashboard() {
                                     <div className="p-3 bg-blue-100 rounded-lg">
                                         <MapPin className="w-6 h-6 text-blue-600" />
                                     </div>
-                                    <h3 className="font-medium text-gray-600">Farm Size</h3>
+                                    <h3 className="font-medium text-gray-600">{t('stats.farmSize')}</h3>
                                 </div>
                                 <p className="text-3xl font-bold text-gray-900">
                                     {farmer.farmAreaAcres || farmer.areaAcres}
                                 </p>
-                                <p className="text-sm text-gray-500 mt-1">acres</p>
+                                <p className="text-sm text-gray-500 mt-1">{t('stats.acres')}</p>
                             </div>
 
                             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
@@ -122,7 +137,7 @@ export default function Dashboard() {
                                     <div className="p-3 bg-green-100 rounded-lg">
                                         <Leaf className="w-6 h-6 text-green-600" />
                                     </div>
-                                    <h3 className="font-medium text-gray-600">Crop Type</h3>
+                                    <h3 className="font-medium text-gray-600">{t('stats.cropType')}</h3>
                                 </div>
                                 <p className="text-3xl font-bold text-gray-900">
                                     {farmer.cropDetails?.cropType || 'N/A'}
@@ -137,12 +152,12 @@ export default function Dashboard() {
                                     <div className="p-3 bg-purple-100 rounded-lg">
                                         <Droplets className="w-6 h-6 text-purple-600" />
                                     </div>
-                                    <h3 className="font-medium text-gray-600">Annual Income</h3>
+                                    <h3 className="font-medium text-gray-600">{t('stats.annualIncome')}</h3>
                                 </div>
                                 <p className="text-3xl font-bold text-gray-900">
                                     ₹{farmer.annualIncome ? (farmer.annualIncome / 100000).toFixed(1) : 'N/A'}
                                 </p>
-                                <p className="text-sm text-gray-500 mt-1">lakhs</p>
+                                <p className="text-sm text-gray-500 mt-1">{t('stats.lakhs')}</p>
                             </div>
 
                             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition">
@@ -150,13 +165,13 @@ export default function Dashboard() {
                                     <div className="p-3 bg-orange-100 rounded-lg">
                                         <BarChart3 className="w-6 h-6 text-orange-600" />
                                     </div>
-                                    <h3 className="font-medium text-gray-600">Setup Status</h3>
+                                    <h3 className="font-medium text-gray-600">{t('stats.setupStatus')}</h3>
                                 </div>
                                 <p className="text-3xl font-bold text-green-600">
                                     {farmer.farmSetupComplete ? '✓' : '○'}
                                 </p>
                                 <p className="text-sm text-gray-500 mt-1">
-                                    {farmer.farmSetupComplete ? 'Complete' : 'Pending'}
+                                    {farmer.farmSetupComplete ? t('stats.complete') : t('stats.pending')}
                                 </p>
                             </div>
                         </div>
@@ -165,22 +180,22 @@ export default function Dashboard() {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {/* Personal Info */}
                             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                                <h3 className="text-lg font-bold text-gray-900 mb-4">Personal Information</h3>
+                                <h3 className="text-lg font-bold text-gray-900 mb-4">{t('personal.title')}</h3>
                                 <div className="space-y-4">
                                     <div className="flex justify-between border-b border-gray-100 pb-3">
-                                        <span className="text-gray-600">Full Name</span>
+                                        <span className="text-gray-600">{t('personal.fullName')}</span>
                                         <span className="font-semibold text-gray-900">{farmer.fullName}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-gray-100 pb-3">
-                                        <span className="text-gray-600">Father's Name</span>
+                                        <span className="text-gray-600">{t('personal.fatherName')}</span>
                                         <span className="font-semibold text-gray-900">{farmer.fatherName}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-gray-100 pb-3">
-                                        <span className="text-gray-600">Age</span>
+                                        <span className="text-gray-600">{t('personal.age')}</span>
                                         <span className="font-semibold text-gray-900">{farmer.age}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-gray-600">Mobile</span>
+                                        <span className="text-gray-600">{t('personal.mobile')}</span>
                                         <span className="font-semibold text-gray-900">{farmer.mobileNumber}</span>
                                     </div>
                                 </div>
@@ -188,22 +203,22 @@ export default function Dashboard() {
 
                             {/* Location Info */}
                             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                                <h3 className="text-lg font-bold text-gray-900 mb-4">Location Details</h3>
+                                <h3 className="text-lg font-bold text-gray-900 mb-4">{t('location.title')}</h3>
                                 <div className="space-y-4">
                                     <div className="flex justify-between border-b border-gray-100 pb-3">
-                                        <span className="text-gray-600">State</span>
+                                        <span className="text-gray-600">{t('location.state')}</span>
                                         <span className="font-semibold text-gray-900">{farmer.location?.state}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-gray-100 pb-3">
-                                        <span className="text-gray-600">District</span>
+                                        <span className="text-gray-600">{t('location.district')}</span>
                                         <span className="font-semibold text-gray-900">{farmer.location?.district}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-gray-100 pb-3">
-                                        <span className="text-gray-600">Village</span>
+                                        <span className="text-gray-600">{t('location.village')}</span>
                                         <span className="font-semibold text-gray-900">{farmer.location?.village}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-gray-600">Coordinates</span>
+                                        <span className="text-gray-600">{t('location.coordinates')}</span>
                                         <span className="font-semibold text-gray-900 text-sm">
                                             {farmer.location?.latitude.toFixed(3)}, {farmer.location?.longitude.toFixed(3)}
                                         </span>
@@ -215,24 +230,24 @@ export default function Dashboard() {
                         {/* Crop Information */}
                         {farmer.cropDetails && (
                             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-8">
-                                <h3 className="text-lg font-bold text-green-900 mb-4">Current Crop Details</h3>
+                                <h3 className="text-lg font-bold text-green-900 mb-4">{t('crop.title')}</h3>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                                     <div>
-                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">Crop Type</p>
+                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">{t('crop.type')}</p>
                                         <p className="text-2xl font-bold text-green-900">{farmer.cropDetails.cropType}</p>
                                     </div>
                                     <div>
-                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">Variety</p>
+                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">{t('crop.variety')}</p>
                                         <p className="text-2xl font-bold text-green-900">{farmer.cropDetails.cropVariety}</p>
                                     </div>
                                     <div>
-                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">Sowing Date</p>
+                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">{t('crop.sowingDate')}</p>
                                         <p className="text-lg font-bold text-green-900">
                                             {new Date(farmer.cropDetails.sowingDate).toLocaleDateString()}
                                         </p>
                                     </div>
                                     <div>
-                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">Harvest Date</p>
+                                        <p className="text-xs uppercase font-semibold text-green-700 mb-1">{t('crop.harvestDate')}</p>
                                         <p className="text-lg font-bold text-green-900">
                                             {new Date(farmer.cropDetails.harvestingDate).toLocaleDateString()}
                                         </p>
@@ -241,6 +256,11 @@ export default function Dashboard() {
                             </div>
                         )}
                     </div>
+                )}
+
+                {/* Claim Status Tab */}
+                {activeTab === 'claimStatus' && (
+                    <ClaimStatus />
                 )}
 
                 {/* Weather Tab */}
