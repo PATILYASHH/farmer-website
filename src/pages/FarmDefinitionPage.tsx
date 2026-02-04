@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { MapPin, Trash2, ChevronRight } from 'lucide-react';
-import { MapContainer, TileLayer, FeatureGroup, Popup } from 'react-leaflet';
+import { Trash2, ChevronRight } from 'lucide-react';
+import { MapContainer, TileLayer, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -59,10 +59,10 @@ export default function FarmDefinitionPage({ onNext }: { onNext: () => void }) {
         layers.eachLayer((layer: any) => {
             if (layer instanceof L.Polygon) {
                 const latlngs = layer.getLatLngs()[0];
-                const points = latlngs.map((point: any) => ({
+                const points = Array.isArray(latlngs) ? latlngs.map((point: any) => ({
                     latitude: point.lat,
                     longitude: point.lng,
-                }));
+                })) : [];
 
                 setDrawnPoints(points);
                 setError('');

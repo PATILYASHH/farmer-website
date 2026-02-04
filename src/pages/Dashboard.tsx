@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import WeatherComponent from '../components/WeatherComponent';
 import DisasterSimulation from '../components/DisasterSimulation';
-import { LogOut, MapPin, BarChart3, AlertTriangle, Leaf, Droplets } from 'lucide-react';
+import { LogOut, MapPin, BarChart3, Leaf, Droplets } from 'lucide-react';
 
 // Mock weather data
 const mockCurrentWeather = {
