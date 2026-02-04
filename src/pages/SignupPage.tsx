@@ -265,7 +265,7 @@ export default function SignupPage({ onSwitchToLogin }: { onSwitchToLogin: () =>
                                         handleInputChange('aadharNumber', e.target.value.replace(/\D/g, '').slice(0, 12))
                                     }
                                     placeholder="XXXX-XXXX-XXXX (12 digits)"
-                                    maxLength="14"
+                                    maxLength={14}
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
                                 />
                             </div>
@@ -294,7 +294,7 @@ export default function SignupPage({ onSwitchToLogin }: { onSwitchToLogin: () =>
                                         handleInputChange('mobileNumber', e.target.value.replace(/\D/g, '').slice(0, 10))
                                     }
                                     placeholder="10-digit mobile number"
-                                    maxLength="10"
+                                    maxLength={10}
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
                                 />
                             </div>
@@ -389,7 +389,7 @@ export default function SignupPage({ onSwitchToLogin }: { onSwitchToLogin: () =>
                                         handleInputChange('ifscCode', e.target.value.toUpperCase().slice(0, 11))
                                     }
                                     placeholder="e.g., ICIC0000001"
-                                    maxLength="11"
+                                    maxLength={11}
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
                                 />
                             </div>

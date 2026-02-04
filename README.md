@@ -49,6 +49,39 @@ VITE_GEMINI_API_KEY=your_gemini_api_key
 3. **Insurance** - Minimum 10% damage required, ₹50K/acre
 4. **AI Features** - Damage analysis, crop advisory, chatbot
 
+## 📱 PWA Installation
+
+This application is a **Progressive Web App (PWA)** that can be installed on mobile devices for a native app-like experience.
+
+### Installing on Mobile (Android/iOS)
+
+**Android (Chrome/Edge):**
+1. Open the website in Chrome or Edge browser
+2. Tap the menu (⋮) and select "Install app" or "Add to Home screen"
+3. Confirm the installation
+4. The app icon will appear on your home screen
+
+**iOS (Safari):**
+1. Open the website in Safari browser
+2. Tap the Share button (□↑)
+3. Scroll down and tap "Add to Home Screen"
+4. Name the app and tap "Add"
+5. The app icon will appear on your home screen
+
+**Desktop (Chrome/Edge):**
+1. Look for the install icon (⊕) in the address bar
+2. Click "Install" when prompted
+3. The app will open in its own window
+
+### PWA Features
+
+- ✅ **Offline Support** - Works without internet connection (cached content)
+- ✅ **Install to Home Screen** - Native app-like experience
+- ✅ **Fast Loading** - Assets are cached for instant access
+- ✅ **Auto-Updates** - Service worker automatically updates content
+- ✅ **Push Notifications Ready** - Infrastructure in place for future updates
+- ✅ **Responsive Design** - Optimized for all screen sizes
+
 ## 📦 Tech Stack
 
 - React + TypeScript + Vite
