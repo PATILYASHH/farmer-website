@@ -220,7 +220,7 @@ export default function Dashboard() {
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-sm md:text-base text-gray-600">{t('location.coordinates')}</span>
-                                        <span className="text-sm md:text-base font-semibold text-gray-900 text-xs md:text-sm text-right">
+                                        <span className="text-xs md:text-sm font-semibold text-gray-900 text-right">
                                             {farmer.location?.latitude.toFixed(3)}, {farmer.location?.longitude.toFixed(3)}
                                         </span>
                                     </div>
