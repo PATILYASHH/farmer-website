@@ -63,6 +63,16 @@ npm run build
 npm run preview
 ```
 
+## 🚀 Deploy to Netlify
+
+This project is configured for easy deployment to Netlify. See [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md) for detailed instructions.
+
+**Quick Deploy:**
+1. Push to GitHub
+2. Connect repository to Netlify
+3. Add environment variables in Netlify dashboard
+4. Deploy automatically!
+
 ---
 
 **Note**: Demo application with simulated data for hackathon demonstration.
